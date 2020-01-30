@@ -1,0 +1,18 @@
+<h1>Editing Book</h1>
+      <%= form_with(model: @book, local: true) do |form| %>
+  
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :opinion %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div class="actions">
+    <input type="submit" name="commit" value="Update Book" class="btn btn-primary col-xs-3" data-disable-with="Update Book">
+  </div>
+<% end %>

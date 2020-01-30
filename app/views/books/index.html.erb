@@ -1,0 +1,90 @@
+
+<%= render 'layouts/error_messages', model: @book %>
+
+<div class="container"> 
+
+<div class="row">
+
+  <div class = "col-lg-3">
+
+<h1>User info</h1>
+<%= attachment_image_tag current_user ,:profile_image,:fill,60,60,class:"img-circle pull-left profile-thumb",fallback:"no_image.jpg" %>
+<table class="table">
+  <tr>
+    <td>name</td>
+    <td><%= current_user.name %></td>
+  </tr>
+  <tr>
+    <td>introduction</td>
+    <td><%= current_user.introduction %></td>
+  </tr>
+</table>
+ <div class="row">
+
+   <%= link_to "", edit_user_path(@user),class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+
+
+
+
+
+
+
+
+</div>
+
+
+    <h1>New Book</h1>
+    <%= form_with(model: @book, local: true) do |form| %>
+  
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :opinion %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div class="actions">
+    <input type="submit" name="commit" value="Create Book" class="btn btn-primary col-xs-12" data-disable-with="Create Book">
+  </div>
+<% end %>
+
+  </div>
+
+	<div class = "col-lg-9">
+		<h1>Books</h1>
+
+		<table class="table">
+        <thead>
+        	<tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+        	</tr>
+        	 </thead>
+        	<tbody>
+        		<% @books.each do |book| %>
+        		<tr>
+        		<td><%= attachment_image_tag book.user,:profile_image,:fill,60,60,class:"img-circle pull-left profile-thumb",fallback:"no_image.jpg" %></td>
+        		
+        		<td>
+            
+              <%= link_to book.title, book_path(book.id) %>
+              <%#= link_to ボタンになる文字, 行き先_path %>
+
+        		<td><%= book.body %></td>
+        	</tr>
+        		<% end %>
+
+        		</tbody>
+
+
+
+		</table>
+
+	</div>
+</div>
+</div>

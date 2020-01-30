@@ -1,0 +1,82 @@
+<div class="container">
+
+<div class="row">
+
+  <div class = "col-lg-3">
+    <% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+<h1>User info</h1>
+<%= attachment_image_tag @books.user ,:profile_image,:fill,60,60,class:"img-circle pull-left profile-thumb",fallback:"no_image.jpg" %>
+<table class="table">
+  <tr>
+    <td>name</td>
+    <td><%= @books.user.name %></td>
+  </tr>
+  <tr>
+    <td>introduction</td>
+    <td><%= current_user.introduction %></td>
+  </tr>
+</table>
+ <div class="row">
+
+   <%= link_to "", edit_user_path(@user),class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+
+
+
+</div>
+
+
+    <h1>New Book</h1>
+    <%= form_with(model: @book, local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :opinion %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div class="actions">
+    <input type="submit" name="commit" value="Create Book" class="btn btn-primary col-xs-12" data-disable-with="Create Book">
+  </div>
+<% end %>
+
+  </div>
+
+    <div class = "col-lg-9">
+        <h1>Book detail</h1>
+
+        <table class="table">
+        <thead>
+            <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            </tr>
+             </thead>
+            <tbody>
+                <tr>
+                <td><%= attachment_image_tag @books.user,:profile_image,:fill,60,60,class:"img-circle pull-left profile-thumb",fallback:"no_image.jpg" %>
+                  <%=link_to @books.user.name, user_path(current_user) %>
+                </td>
+                <td><%= @books.title %></td>
+                <td><%= @books.body %></td>
+                <% if current_user == @books.user %>
+                <td><%=link_to "edit", edit_book_path(@books),  class: "btn-sm btn-success" %></td>
+                <td><%=link_to "destroy", book_path(@books),method: :delete, data: {confirm: "削除しますか？"},  class: "btn-sm btn-danger"  %></td>
+                <% end %>
+
+            </tr>
+
+                </tbody>
+
+        </table>
+
+    </div>
+</div>
+</div>

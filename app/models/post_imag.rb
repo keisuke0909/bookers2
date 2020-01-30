@@ -1,0 +1,2 @@
+class PostImag < ApplicationRecord
+end
