@@ -1,20 +1,27 @@
-<%= render 'layouts/error_messages', model: @user %>
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
 
+
+<%= @user.id == current_user.id %>
 <h1>User info</h1>
-		<%= form_for(@user) do |form| %>
 
-  <div class="field">
-    <%= form.text_field :name %>
-  </div>
-  <div class="col-sm-12">
-     <%= form.attachment_field :profile_image %>
-  </div>
+<%= form_for(@user) do |form| %>
 
-  <div class="field">
-    <%= form.text_area :introduction %>
-  </div>
+<div class="field">
+ <%= form.text_field :name %>
+</div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<div class="col-sm-12">
+ <%= form.attachment_field :profile_image %>
+</div>
+
+<div class="field">
+ <%= form.text_area :introduction %>
+</div>
+
+<div class="actions">
+ <%= form.submit %>
+</div>
+
 <% end %>

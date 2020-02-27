@@ -2,10 +2,12 @@
 
 <div class="row">
 
-  <div class = "col-lg-3">
+  <div class = "col-xs-3">
     <% if flash[:notice] %>
   <p><%= flash[:notice] %></p>
 <% end %>
+
+<%= render 'layouts/error_messages', model: @user %>
 
 <h1>User info</h1>
 <%= attachment_image_tag @books.user ,:profile_image,:fill,60,60,class:"img-circle pull-left profile-thumb",fallback:"no_image.jpg" %>
@@ -22,13 +24,11 @@
  <div class="row">
 
    <%= link_to "", edit_user_path(@user),class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
-
-
-
 </div>
 
 
-    <h1>New Book</h1>
+    <h1>New book</h1>
+
     <%= form_with(model: @book, local: true) do |form| %>
 
   <div class="field">
@@ -42,13 +42,13 @@
   </div>
 
   <div class="actions">
-    <input type="submit" name="commit" value="Create Book" class="btn btn-primary col-xs-12" data-disable-with="Create Book">
+    <input type="submit" name="commit" value="Create Book" class="btn btn-primary col-xs-12"data-disable-with="Create Book">
   </div>
 <% end %>
 
   </div>
 
-    <div class = "col-lg-9">
+    <div class = "col-xs-9">
         <h1>Book detail</h1>
 
         <table class="table">
@@ -58,7 +58,8 @@
             <th></th>
             <th></th>
             </tr>
-             </thead>
+        </thead>
+
             <tbody>
                 <tr>
                 <td><%= attachment_image_tag @books.user,:profile_image,:fill,60,60,class:"img-circle pull-left profile-thumb",fallback:"no_image.jpg" %>
@@ -67,16 +68,13 @@
                 <td><%= @books.title %></td>
                 <td><%= @books.body %></td>
                 <% if current_user == @books.user %>
-                <td><%=link_to "edit", edit_book_path(@books),  class: "btn-sm btn-success" %></td>
-                <td><%=link_to "destroy", book_path(@books),method: :delete, data: {confirm: "削除しますか？"},  class: "btn-sm btn-danger"  %></td>
+                <td><%=link_to "Edit", edit_book_path(@books),  class: "btn-sm btn-success" %></td>
+                <td><%=link_to "Destroy", book_path(@books),method: :delete, data: {confirm: "削除しますか？"},  class: "btn-sm btn-danger"  %></td>
                 <% end %>
 
             </tr>
-
-                </tbody>
-
+        </tbody>
         </table>
-
     </div>
-</div>
-</div>
+    </div>
+    </div>
